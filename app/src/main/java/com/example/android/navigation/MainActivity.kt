@@ -19,22 +19,26 @@ package com.example.android.navigation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.android.navigation.databinding.ActivityMainBinding
 import com.example.android.navigation.databinding.FragmentTitleBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var drawerLayout : DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         @Suppress("UNUSED_VARIABLE")
         val binding  = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        drawerLayout = binding.drawerLayout
         //Finding the Navigation Controller and linking it with the Action Bar
         val navController = this.findNavController(R.id.customNavHostFragment)
-        NavigationUI.setupActionBarWithNavController(this, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
 
     }
 
     // Function of the Back button to NavigateUp
-    override fun onSupportNavigateUp() : Boolean = this.findNavController(R.id.customNavHostFragment).navigateUp()
+    override fun onSupportNavigateUp() : Boolean = NavigationUI.navigateUp(this.findNavController(R.id.customNavHostFragment), drawerLayout)
 }
