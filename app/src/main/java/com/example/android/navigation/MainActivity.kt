@@ -26,7 +26,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.android.navigation.databinding.ActivityMainBinding
 import com.example.android.navigation.databinding.FragmentTitleBinding
-
+//
 class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout : DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
